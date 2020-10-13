@@ -1,9 +1,16 @@
 package org.asahu.hub.java_study;
 
-import org.asahu.hub.java_study.patterns.SingletonCalculator;
 import static java.lang.System.out;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.CompletableFuture;
+
+import org.asahu.hub.java_study.patterns.SingletonCalculator;
+
 public class App {
+	App other;
 
 	public static void main(String[] args) {
 		App app = new App();
@@ -18,4 +25,5 @@ public class App {
 		SingletonCalculator sc2 = SingletonCalculator.getInstance();
 		out.println(sc2.equals(sc));
 	}
+
 } // End App
