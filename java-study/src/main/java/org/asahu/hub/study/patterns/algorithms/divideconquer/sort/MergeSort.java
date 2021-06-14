@@ -10,4 +10,9 @@ import org.asahu.hub.study.patterns.algorithms.divideconquer.DivideAndConquerAlg
  */
 public class MergeSort implements DivideAndConquerAlgorithm<Integer> {
 
-} // End Merge Sort
+	@Override
+	public Integer[] sort(Integer[] inputData) {
+		return DivideAndConquerAlgorithm.super.sort(inputData);
+	}
+
+}

@@ -19,7 +19,7 @@ public class SearchAlgorithmsController {
 	public DivideAndConquerAlgorithm<Integer> binarySearch;
 
 	@GetMapping("/binary-search")
-	public ResponseEntity<String> runBinarySearchForSmallDataset(@RequestParam(name = "array") Integer[] inputData,
+	public ResponseEntity<String> runBinarySearch(@RequestParam(name = "array") Integer[] inputData,
 			@RequestParam(name = "searchElement") Integer searchElement) {
 		Instant startTime = Instant.now();
 		int indexOfElement = binarySearch.indexOf(inputData, searchElement);

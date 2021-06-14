@@ -15,17 +15,18 @@ import org.springframework.web.bind.annotation.RestController;
 public class SortAlgorithmsController {
 
 	@Autowired
-	@Qualifier("BinarySearch")
-	public DivideAndConquerAlgorithm<Integer> binarySearch;
+	@Qualifier("MergeSort")
+	public DivideAndConquerAlgorithm<Integer> mergeSort;
 
-	@GetMapping("/binary-search")
-	public ResponseEntity<String> runBinarySearchForSmallDataset(@RequestParam(name = "array") Integer[] inputData,
-			@RequestParam(name = "searchElement") Integer searchElement) {
+	@GetMapping("/merge-sort")
+	public ResponseEntity<String> runMergeSort(@RequestParam(name = "array") Integer[] inputData) {
 		Instant startTime = Instant.now();
-		int indexOfElement = binarySearch.indexOf(inputData, searchElement);
+		// int indexOfElement = binarySearch.indexOf(inputData, searchElement);
 		Instant endTime = Instant.now();
 		String executionTimeDescription = measureExecutionTime(startTime, endTime);
-		return ResponseEntity.ok("\nElement Index found at: " + indexOfElement + "\n" + executionTimeDescription);
+		// return ResponseEntity.ok("\nElement Index found at: " + indexOfElement + "\n"
+		// + executionTimeDescription);
+		return null;
 	}
 
 	private String measureExecutionTime(Instant startTime, Instant endTime) {
