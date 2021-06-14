@@ -40,4 +40,12 @@ public class BinarySearch implements DivideAndConquerAlgorithm<Integer> {
 		return -1;
 	}
 
+	@Override
+	public boolean isPresent(Integer[] inputData, Integer element) {
+		if (binarySearch(inputData, element, 0) != -1) {
+			return Boolean.FALSE;
+		}
+		return Boolean.TRUE;
+	}
+
 }
