@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.asahu.hub.java_study.patterns;
+package org.asahu.hub.study.patterns;
 
 /**
  * A class representing a perfect Immutable Object.
@@ -37,6 +37,5 @@ public final class ImmutableCalculator {
 	public int getOperand2() {
 		return operand2;
 	}
-	
-} // End SingletonPatternClass
 
+} // End SingletonPatternClass

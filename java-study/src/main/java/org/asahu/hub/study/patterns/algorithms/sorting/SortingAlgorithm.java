@@ -1,4 +1,4 @@
-package org.asahu.hub.java_study.patterns.algorithms.sorting;
+package org.asahu.hub.study.patterns.algorithms.sorting;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -11,7 +11,7 @@ public interface SortingAlgorithm<I> {
 		}
 		return new LinkedList<I>();
 	} // End sort
-	
+
 	public int sortsize();
-	
+
 } // End SortingAlgorithm

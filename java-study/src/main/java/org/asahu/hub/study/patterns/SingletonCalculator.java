@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.asahu.hub.java_study.patterns;
+package org.asahu.hub.study.patterns;
 
 /**
  * A class representing a perfect Singleton Object.
@@ -9,7 +9,7 @@ package org.asahu.hub.java_study.patterns;
  * @author Akshay Sahu
  */
 public class SingletonCalculator {
-	
+
 	/**
 	 * 
 	 * Steps involved:
@@ -52,5 +52,5 @@ public class SingletonCalculator {
 	public int add(int x, int y) {
 		return x + y;
 	}
-	
+
 } // End SingletonPatternClass
