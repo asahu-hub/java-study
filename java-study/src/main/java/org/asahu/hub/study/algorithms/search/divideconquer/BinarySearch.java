@@ -1,10 +1,10 @@
-package org.asahu.hub.study.patterns.algorithms.divideconquer.search;
+package org.asahu.hub.study.algorithms.search.divideconquer;
 
 import java.util.Arrays;
 
-import org.asahu.hub.study.patterns.algorithms.divideconquer.DivideAndConquerAlgorithm;
+import org.asahu.hub.study.algorithms.SearchOperations;
 
-public class BinarySearch implements DivideAndConquerAlgorithm<Integer> {
+public class BinarySearch implements SearchOperations<Integer> {
 
 	/**
 	 * The method performs binary search to determine the index of the searched

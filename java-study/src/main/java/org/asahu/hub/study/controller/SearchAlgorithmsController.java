@@ -1,9 +1,9 @@
 package org.asahu.hub.study.controller;
 
-import java.time.Duration;
 import java.time.Instant;
 
-import org.asahu.hub.study.patterns.algorithms.divideconquer.DivideAndConquerAlgorithm;
+import org.asahu.hub.study.algorithms.SearchOperations;
+import org.asahu.hub.study.utils.ExecutionTimeCalculator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
@@ -16,20 +16,17 @@ public class SearchAlgorithmsController {
 
 	@Autowired
 	@Qualifier("BinarySearch")
-	public DivideAndConquerAlgorithm<Integer> binarySearch;
+	public SearchOperations<Integer> binarySearch;
 
 	@GetMapping("/binary-search")
 	public ResponseEntity<String> runBinarySearch(@RequestParam(name = "array") Integer[] inputData,
 			@RequestParam(name = "searchElement") Integer searchElement) {
-		Instant startTime = Instant.now();
+		Instant startInstance = Instant.now();
 		int indexOfElement = binarySearch.indexOf(inputData, searchElement);
-		Instant endTime = Instant.now();
-		String executionTimeDescription = measureExecutionTime(startTime, endTime);
-		return ResponseEntity.ok("\nElement Index found at: " + indexOfElement + "\n" + executionTimeDescription);
-	}
-
-	private String measureExecutionTime(Instant startTime, Instant endTime) {
-		return "Execution completed in: " + Duration.between(startTime, endTime).getNano() + " nanoseconds.";
+		Instant endInstance = Instant.now();
+		long executionTimeDescription = ExecutionTimeCalculator.measureExecutionTimeInNanos(startInstance, endInstance);
+		return ResponseEntity.ok(
+				"\nElement Index found at: " + indexOfElement + "\nExecution Time (Nanos):" + executionTimeDescription);
 	}
 
 }
