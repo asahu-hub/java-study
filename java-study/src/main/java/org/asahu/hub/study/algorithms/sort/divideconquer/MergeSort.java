@@ -3,6 +3,10 @@
  */
 package org.asahu.hub.study.algorithms.sort.divideconquer;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.asahu.hub.study.algorithms.SortOperations;
 
 /**
@@ -12,22 +16,67 @@ public class MergeSort implements SortOperations<Integer> {
 
 	@Override
 	public Integer[] sort(Integer[] inputData) {
-
-		return inputData;
+		return mergeSort(inputData);
 	}
 
-	private Integer[] merge(Integer[] firstArray, Integer[] secondArray) {
-		int firstArrayStartIndex = 0;
-		int firstArrayCount = firstArray.length;
+	private Integer[] mergeSort(Integer[] iArray) {
+		int aLen = iArray.length;
+		if (aLen == 1 || aLen == 0) {
+			return iArray;
+		}
 
-		int secondArrayCount = secondArray.length;
-		int secondArrayStartIndex = 0;
+		if (aLen == 2) {
+			Integer[] fArray = { iArray[0] };
+			Integer[] sArray = { iArray[1] };
+			return merge(fArray, sArray);
+		}
 
-		int newarrayCount = firstArrayCount + secondArrayCount;
+		int midIndex = iArray.length / 2;
+		Integer[] fArray = mergeSort(Arrays.copyOfRange(iArray, 0, midIndex));
+		Integer[] sArray = mergeSort(Arrays.copyOfRange(iArray, midIndex, iArray.length));
+		return merge(fArray, sArray);
+	}
 
-		Integer[] sortedArray = new Integer[newarrayCount];
+	/**
+	 * The method merges elements of two sorted arrays.
+	 * 
+	 * Runtime -> Worst-Case -> O(n)
+	 * 
+	 * @return A sorted array
+	 */
+	private Integer[] merge(Integer[] fArray, Integer[] sArray) {
+		int sIndex = 0;
+		int nIndex = 0;
 
-		return sortedArray;
+		int nArrayCount = (fArray.length + sArray.length);
+		Integer[] mergedArray = new Integer[nArrayCount];
+
+		while (nIndex < nArrayCount) {
+			int cElement = -1;
+
+			if (sArray.length == 0) {
+				cElement = fArray[sIndex];
+				fArray = pop(fArray);
+			} else if (fArray.length == 0) {
+				cElement = sArray[sIndex];
+				sArray = pop(sArray);
+			} else if (sArray[sIndex] < fArray[sIndex]) {
+				cElement = sArray[sIndex];
+				sArray = pop(sArray);
+			} else if (fArray[sIndex] < sArray[sIndex]) {
+				cElement = fArray[sIndex];
+				fArray = pop(fArray);
+			}
+			mergedArray[nIndex] = cElement;
+			++nIndex;
+		}
+		return mergedArray;
+	}
+
+	private Integer[] pop(Integer[] array) {
+		List<Integer> list = new ArrayList<Integer>(Arrays.asList(array));
+		list.remove(0);
+		return list.toArray(new Integer[array.length - 1]);
 	}
 
 }

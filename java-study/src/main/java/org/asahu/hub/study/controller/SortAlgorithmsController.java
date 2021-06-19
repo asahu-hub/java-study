@@ -1,6 +1,7 @@
 package org.asahu.hub.study.controller;
 
 import java.time.Instant;
+import java.util.Arrays;
 
 import org.asahu.hub.study.algorithms.SortOperations;
 import org.asahu.hub.study.utils.ExecutionTimeCalculator;
@@ -23,9 +24,10 @@ public class SortAlgorithmsController {
 		Instant startInstance = Instant.now();
 		Integer[] sortedData = mergeSort.sort(inputData);
 		Instant endInstance = Instant.now();
-		long executionTimeDescription = ExecutionTimeCalculator.measureExecutionTimeInNanos(startInstance, endInstance);
-		return ResponseEntity
-				.ok("\nSorted Data: " + sortedData + "\nExecution Time (Nanos):" + executionTimeDescription);
+		long executionTimeDescription = ExecutionTimeCalculator.measureExecutionTimeInMillis(startInstance,
+				endInstance);
+		return ResponseEntity.ok("\nSorted Data: " + Arrays.toString(sortedData) + "\nExecution Time (Millis):"
+				+ executionTimeDescription);
 
 	}
 }

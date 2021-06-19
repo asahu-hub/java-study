@@ -24,9 +24,10 @@ public class SearchAlgorithmsController {
 		Instant startInstance = Instant.now();
 		int indexOfElement = binarySearch.indexOf(inputData, searchElement);
 		Instant endInstance = Instant.now();
-		long executionTimeDescription = ExecutionTimeCalculator.measureExecutionTimeInNanos(startInstance, endInstance);
-		return ResponseEntity.ok(
-				"\nElement Index found at: " + indexOfElement + "\nExecution Time (Nanos):" + executionTimeDescription);
+		long executionTimeDescription = ExecutionTimeCalculator.measureExecutionTimeInMillis(startInstance,
+				endInstance);
+		return ResponseEntity.ok("\nElement Index found at: " + indexOfElement + "\nExecution Time (Millis):"
+				+ executionTimeDescription);
 	}
 
 }
