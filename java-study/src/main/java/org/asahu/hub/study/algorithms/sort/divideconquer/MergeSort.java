@@ -54,16 +54,29 @@ public class MergeSort implements SortOperations<Integer> {
 		while (nIndex < nArrayCount) {
 			int cElement = -1;
 
+			// If second array is empty, then continue adding elements from first array.
 			if (sArray.length == 0) {
 				cElement = fArray[sIndex];
 				fArray = pop(fArray);
-			} else if (fArray.length == 0) {
+
+			}
+			// If first array is empty, then continue adding elements from second array.
+			else if (fArray.length == 0) {
 				cElement = sArray[sIndex];
 				sArray = pop(sArray);
-			} else if (sArray[sIndex] < fArray[sIndex]) {
+			}
+			// Check first elements of both array.
+
+			// If first element of second array is smaller than first element of first
+			// array, then add it to new array and remove the element from second array.
+			else if (sArray[sIndex] < fArray[sIndex]) {
 				cElement = sArray[sIndex];
 				sArray = pop(sArray);
-			} else if (fArray[sIndex] < sArray[sIndex]) {
+			}
+
+			// If first element of first array is smaller than first element of second
+			// array, then add it to new array and remove the element from first array.
+			else if (fArray[sIndex] < sArray[sIndex]) {
 				cElement = fArray[sIndex];
 				fArray = pop(fArray);
 			}
