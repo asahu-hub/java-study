@@ -19,15 +19,35 @@ public class SortAlgorithmsController {
 	@Qualifier("MergeSort")
 	public SortOperations<Integer> mergeSort;
 
+	@Autowired
+	@Qualifier("QuickSort")
+	public SortOperations<Integer> quickSort;
+
 	@GetMapping("/merge-sort")
 	public ResponseEntity<String> runMergeSort(@RequestParam(name = "array") Integer[] inputData) {
+		int numberOfElementsReceived = inputData.length;
 		Instant startInstance = Instant.now();
 		Integer[] sortedData = mergeSort.sort(inputData);
+		int numberOfElementsSorted = sortedData.length;
 		Instant endInstance = Instant.now();
 		long executionTimeDescription = ExecutionTimeCalculator.measureExecutionTimeInMillis(startInstance,
 				endInstance);
-		return ResponseEntity.ok("\nSorted Data: " + Arrays.toString(sortedData) + "\nExecution Time (Millis):"
-				+ executionTimeDescription);
+		return ResponseEntity.ok("\nSorted Data: " + Arrays.toString(sortedData) + "\nNumber of Elements received: "
+				+ numberOfElementsReceived + "\n Number of Elements Sorted: " + numberOfElementsSorted
+				+ "\nTime (Millis):" + executionTimeDescription);
+	}
 
+	@GetMapping("/quick-sort")
+	public ResponseEntity<String> runQuickSort(@RequestParam(name = "array") Integer[] inputData) {
+		int numberOfElementsReceived = inputData.length;
+		Instant startInstance = Instant.now();
+		Integer[] sortedData = quickSort.sort(inputData);
+		int numberOfElementsSorted = sortedData.length;
+		Instant endInstance = Instant.now();
+		long executionTimeDescription = ExecutionTimeCalculator.measureExecutionTimeInMillis(startInstance,
+				endInstance);
+		return ResponseEntity.ok("\nSorted Data: " + Arrays.toString(sortedData) + "\nNumber of Elements received: "
+				+ numberOfElementsReceived + "\n Number of Elements Sorted: " + numberOfElementsSorted
+				+ "\nTime (Millis):" + executionTimeDescription);
 	}
 }
