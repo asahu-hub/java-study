@@ -19,37 +19,72 @@ public class TestArraysStringsAlgorithms {
 	class lengthOfLongestSubstringTests {
 
 		@Test
-		@DisplayName("Input: abcabcbb -> Output: 3 -> Description: Longest Substring = abc and length = 3")
+		@DisplayName("Input: abcabcbb -> Output: 3 -> Longest Substring = abc")
 		public void testLengthOfLongestSubstringTests_with_SingleSubstring() {
 			String testString = "abcabcbb";
 			assertEquals(3, asAlgorithms.lengthOfLongestSubstring(testString));
-			System.out.println(asAlgorithms.longestSubstringWithoutRepetitions(testString));
 		}
 
 		@Test
-		@DisplayName("Input: bbbbb -> Output: 1 -> Description: Longest Substring = b and length = 1")
+		@DisplayName("Input: bbbbb -> Output: 1 -> Longest Substring = b")
 		public void testLengthOfLongestSubstringTests_with_AllMatchingCharacters() {
 			String testString = "bbbbb";
 			assertEquals(1, asAlgorithms.lengthOfLongestSubstring(testString));
-			System.out.println(asAlgorithms.longestSubstringWithoutRepetitions(testString));
 		}
 
 		@Test
-		@DisplayName("Input: pwwkew -> Output: 3 -> Description: Longest Substring = wke and length = 3")
+		@DisplayName("Input: pwwkew -> Output: 3 -> Longest Substring = wke")
 		public void testLengthOfLongestSubstringTests_with_SubstringAndSubsequence() {
 			String testString = "pwwkew";
 			assertEquals(3, asAlgorithms.lengthOfLongestSubstring(testString));
-			System.out.println(asAlgorithms.longestSubstringWithoutRepetitions(testString));
 		}
 
 		@Test
-		@DisplayName("Input:  -> Output: 0 -> Description: Longest Substring =  and length = 0")
+		@DisplayName("Input:  -> Output: 0 -> Longest Substring =  ")
 		public void testLengthOfLongestSubstringTests_with_EmptyString() {
 			String testString = "";
 			assertEquals(0, asAlgorithms.lengthOfLongestSubstring(testString));
-			System.out.println(asAlgorithms.longestSubstringWithoutRepetitions(testString));
+		}
+	} // End lengthOfLongestSubstringTests
+
+	@Nested
+	@DisplayName("int atoi(String s)")
+	class AtoITests {
+
+		@Test
+		@DisplayName("Input: '42' -> Output: 42")
+		public void testAtoI_With_OnlyIntegers() {
+			String testString = "42";
+			assertEquals(42, asAlgorithms.atoi(testString));
 		}
 
-	}
+		@Test
+		@DisplayName("Input: '   -42' -> Output: -42")
+		public void testAtoI_With_Whitespace_NegativeInteger() {
+			String testString = "    -42";
+			assertEquals(-42, asAlgorithms.atoi(testString));
+		}
+
+		@Test
+		@DisplayName("Input: '4193 with words' -> Output: 4193")
+		public void testAtoI_With_Integers_And_Text() {
+			String testString = "4193 with words";
+			assertEquals(4193, asAlgorithms.atoi(testString));
+		}
+
+		@Test
+		@DisplayName("Input: 'words and 987' -> Output: 0")
+		public void testAtoI_With_Text_And_Integers() {
+			String testString = "words and 987";
+			assertEquals(0, asAlgorithms.atoi(testString));
+		}
+
+		@Test
+		@DisplayName("Input: '-91283472332' -> Output: -2147483648")
+		public void testAtoI_With_Integer_LessThan_LowerBound() {
+			String testString = "-91283472332";
+			assertEquals(-2147483648, asAlgorithms.atoi(testString));
+		}
+	} // End AtoITests
 
 }
