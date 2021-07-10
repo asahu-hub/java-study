@@ -2,6 +2,7 @@ package org.asahu.hub.study.algorithms.arraysandstrings;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -248,5 +249,50 @@ public class ArraysStringsAlgorithms {
 		}
 		Arrays.sort(nums);
 		return numberOfDistinctElements;
+	}
+
+	/**
+	 * Given two non-negative integers num1 and num2 represented as strings, return
+	 * the product of num1 and num2, also represented as a string.
+	 * 
+	 * Note: You must not use any built-in BigInteger library or convert the inputs
+	 * to integer directly.
+	 */
+	public String multiply(String num1, String num2) {
+		String zero = "0";
+
+		if (num1 == null || num2 == null) {
+			return zero;
+		}
+		num1 = num1.trim();
+		num2 = num2.trim();
+		if (num1.isEmpty() || num2.isEmpty()) {
+			return "";
+		} else if (num1.equals(zero) || num2.equals(zero)) {
+			return zero;
+		}
+
+		long num1_i = atoi2(num1);
+		long num2_i = atoi2(num2);
+		long product = num1_i * num2_i;
+
+		return "" + product;
+	}
+
+	private long atoi2(String s) {
+		long result = 0;
+		Map<String, Integer> DIGITS = new HashMap<>();
+		for (int i = 0; i <= 9; i++) {
+			DIGITS.put("" + i, i);
+		}
+		char[] allCharacters = s.toCharArray();
+		int numbersLen = s.length();
+		int radix = s.length();
+		for (int j = 0; j < numbersLen; j++) {
+			char cChar = allCharacters[j];
+			int cNumber = DIGITS.get("" + cChar);
+			result += cNumber * Math.pow(10, --radix);
+		}
+		return result;
 	}
 }

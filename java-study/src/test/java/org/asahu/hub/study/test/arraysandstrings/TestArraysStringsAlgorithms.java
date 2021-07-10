@@ -153,6 +153,20 @@ public class TestArraysStringsAlgorithms {
 			assertEquals(0, asAlgorithms.inPlaceRemoveDuplicates(testArray));
 		}
 
-	} // End ThreeSumTests
+	} // End RemoveDuplicatesTests
+
+	@Nested
+	@DisplayName("String multiply(String num1, String num2)")
+	class StringMultiplicationTests {
+		@Test
+		@DisplayName("Input: '9', '9' -> Output: '81'")
+		public void testMultiply_With_ValidIntegers() throws Exception {
+			String testValue1 = "6913259244";
+			String testValue2 = "71103343";
+			String expectedOutputString = "491555843274052692";
+			assertEquals(expectedOutputString, asAlgorithms.multiply(testValue1, testValue2));
+		}
+
+	} // End StringMultiplicationTests
 
 }
