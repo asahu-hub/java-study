@@ -128,4 +128,31 @@ public class TestArraysStringsAlgorithms {
 
 	} // End ThreeSumTests
 
+	@Nested
+	@DisplayName("int inPlaceRemoveDuplicates(int[] nums)")
+	class RemoveDuplicatesTests {
+
+		@Test
+		@DisplayName("Input: [1,1,2] -> Output: 2")
+		public void testInPlaceRemoveDuplicates_With_ValidIntegers() throws Exception {
+			int[] testArray = { 1, 1, 2 };
+			assertEquals(2, asAlgorithms.inPlaceRemoveDuplicates(testArray));
+		}
+
+		@Test
+		@DisplayName("Input: [1] -> Output: 1")
+		public void testInPlaceRemoveDuplicates_With_OneInteger() throws Exception {
+			int[] testArray = { 1 };
+			assertEquals(1, asAlgorithms.inPlaceRemoveDuplicates(testArray));
+		}
+
+		@Test
+		@DisplayName("Input: [] -> Output: 0")
+		public void testInPlaceRemoveDuplicates_With_EmptyIntegers() throws Exception {
+			int[] testArray = {};
+			assertEquals(0, asAlgorithms.inPlaceRemoveDuplicates(testArray));
+		}
+
+	} // End ThreeSumTests
+
 }

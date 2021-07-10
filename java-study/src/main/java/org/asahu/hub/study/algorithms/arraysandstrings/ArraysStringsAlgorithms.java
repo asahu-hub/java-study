@@ -1,7 +1,7 @@
 package org.asahu.hub.study.algorithms.arraysandstrings;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -190,9 +190,8 @@ public class ArraysStringsAlgorithms {
 	 * Notice that the solution set must not contain duplicate triplets.
 	 */
 	public List<List<Integer>> threeSum(int[] nums) throws Exception {
-		List<List<Integer>> sum = new ArrayList<>();
 		if (nums.length == 0 || nums.length == 1) {
-			return sum;
+			return Collections.emptyList();
 		}
 
 		Integer[] source = Arrays.stream(nums).boxed().toArray(Integer[]::new);
@@ -205,4 +204,49 @@ public class ArraysStringsAlgorithms {
 				}).collect(Collectors.toSet()).stream().collect(Collectors.toList());
 	}
 
+	/**
+	 * Given an integer array nums sorted in non-decreasing order, remove the
+	 * duplicates in-place such that each unique element appears only once. The
+	 * relative order of the elements should be kept the same.
+	 * 
+	 * Since it is impossible to change the length of the array in some languages,
+	 * you must instead have the result be placed in the first part of the array
+	 * nums. More formally, if there are k elements after removing the duplicates,
+	 * then the first k elements of nums should hold the final result. It does not
+	 * matter what you leave beyond the first k elements.
+	 * 
+	 * Return k after placing the final result in the first k slots of nums.
+	 * 
+	 * Do not allocate extra space for another array. You must do this by modifying
+	 * the input array in-place with O(1) extra memory.
+	 */
+	public int inPlaceRemoveDuplicates(int[] nums) {
+		int numberOfDistinctElements = nums.length;
+		if (numberOfDistinctElements == 0 || numberOfDistinctElements == 1) {
+			return numberOfDistinctElements;
+		}
+
+		int duplicateElementMarker = 200;
+		int totalElements = nums.length;
+		for (int i = 0; i < totalElements; i++) {
+			int cElement = nums[i];
+			if (cElement == 200) {
+				continue;
+			} else {
+				for (int j = 0; j < totalElements; j++) {
+					int scannedElement = nums[j];
+					if (i == j) {
+						continue;
+					} else {
+						if (cElement == scannedElement) {
+							numberOfDistinctElements -= 1;
+							nums[j] = duplicateElementMarker;
+						}
+					}
+				}
+			}
+		}
+		Arrays.sort(nums);
+		return numberOfDistinctElements;
+	}
 }
