@@ -1,8 +1,24 @@
 package org.asahu.hub.study.algorithms.arraysandstrings;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 
+import org.apache.commons.collections4.map.HashedMap;
+import org.asahu.hub.study.algorithms.sort.divideconquer.PermutationAndCombination;
+import org.springframework.stereotype.Component;
+
+@Component
 public class ArraysStringsAlgorithms {
+
+	private final PermutationAndCombination permutationsAndCombinations;
+
+	public ArraysStringsAlgorithms(PermutationAndCombination permutationsAndCombinations) {
+		this.permutationsAndCombinations = permutationsAndCombinations;
+	}
 
 	/**
 	 * <b> Definitions </b>: <br/>
@@ -110,11 +126,103 @@ public class ArraysStringsAlgorithms {
 	 * @return Parsed Integer.
 	 */
 	public int atoi(String s) {
-		if (!s.trim().isEmpty()) {
+		int result = 0;
+		boolean isNegative = false;
+		boolean isSignPresent = false;
+		int maxValue = Integer.MAX_VALUE;
+		int minValue = Integer.MIN_VALUE;
 
+		Map<String, Integer> DIGITS = new HashedMap<>();
+		for (int i = 0; i <= 10; i++) {
+			DIGITS.put("" + i, i);
 		}
 
-		return 0;
+		if (!s.isEmpty()) {
+			String strWithoutWhitespaces = s.replaceAll("^\\s+", "").replaceAll("", "");
+			char firstChar = strWithoutWhitespaces.charAt(0);
+			char[] allCharacters = strWithoutWhitespaces.toCharArray();
+			int allCharsLen = allCharacters.length;
+			if (firstChar == '-') {
+				isNegative = true;
+				isSignPresent = true;
+			} else if (firstChar == '+') {
+				isNegative = false;
+				isSignPresent = true;
+			}
+
+			int numbersLen = isSignPresent ? allCharsLen - 1 : allCharsLen;
+			int j = isSignPresent ? 1 : 0;
+			int counter = 0;
+
+			int[] numbers = new int[numbersLen];
+			for (; j < allCharsLen; j++) {
+				char cChar = allCharacters[j];
+				int cNumber = DIGITS.getOrDefault("" + cChar, -1);
+				if (cNumber != -1) {
+					numbers[counter] = cNumber;
+					++counter;
+				} else {
+					break;
+				}
+			}
+
+			int totalPositions = numbers.length;
+			if (totalPositions > 0) {
+				for (int i = 0; i < numbers.length; i++) {
+					int cNumber = numbers[i];
+					result += cNumber * Math.pow(10, --totalPositions);
+				}
+			}
+		}
+
+		result = isNegative ? -result : result;
+		result = result > maxValue ? maxValue : result;
+		result = result < minValue ? minValue : result;
+		return result;
+	}
+
+	/**
+	 * 
+	 * Given an integer array nums, return all the triplets [nums[i], nums[j],
+	 * nums[k]] such that i != j, i != k, and j != k, and nums[i] + nums[j] +
+	 * nums[k] == 0.
+	 * 
+	 * Notice that the solution set must not contain duplicate triplets.
+	 */
+	public List<List<Integer>> threeSum(int[] nums) {
+		List<List<Integer>> sum = new ArrayList<>();
+		if (nums.length == 0 || nums.length == 1) {
+			return sum;
+		}
+
+		return permutationsAndCombinations.combine(nums, 3).stream().filter(combination -> {
+			if (combination.stream().mapToInt(a -> a).sum() == 0) {
+				return true;
+			}
+			return false;
+		}).collect(Collectors.toList());
+	}
+
+	private List<List<Integer>> combinations(int[] nums, int r) {
+		List<List<Integer>> allCombinations = new ArrayList<>();
+		int total = nums.length;
+
+		for (int sCounter = 0; sCounter < total; sCounter++) {
+			int cNum = nums[sCounter];
+			List<Integer> combination = new ArrayList<>();
+			combination.add(cNum);
+			allCombinations.add(combination);
+		}
+		for (int j = 0; j < r - 1; j++) {
+			allCombinations.forEach(combination -> {
+				for (int sCounter = 0; sCounter < total; sCounter++) {
+					int cNum = nums[sCounter];
+					combination.add(cNum);
+				}
+			});
+		}
+		System.out.println("All Combinations: " + allCombinations);
+		return allCombinations;
 	}
 
 }

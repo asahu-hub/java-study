@@ -1,8 +1,13 @@
 package org.asahu.hub.study.test.arraysandstrings;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.Arrays;
+import java.util.List;
 
 import org.asahu.hub.study.algorithms.arraysandstrings.ArraysStringsAlgorithms;
+import org.asahu.hub.study.algorithms.sort.divideconquer.PermutationAndCombination;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Tag;
@@ -12,7 +17,8 @@ import org.junit.jupiter.api.Test;
 @DisplayName("Testing Arrays and String Algorithms")
 public class TestArraysStringsAlgorithms {
 
-	private ArraysStringsAlgorithms asAlgorithms = new ArraysStringsAlgorithms();
+	private PermutationAndCombination pnc = new PermutationAndCombination();
+	private ArraysStringsAlgorithms asAlgorithms = new ArraysStringsAlgorithms(pnc);
 
 	@Nested
 	@DisplayName("int lengthOfLongestSubstring(String s)")
@@ -85,6 +91,41 @@ public class TestArraysStringsAlgorithms {
 			String testString = "-91283472332";
 			assertEquals(-2147483648, asAlgorithms.atoi(testString));
 		}
-	} // End AtoITests
+	}// End AtoITests
+
+	@Nested
+	@DisplayName("List<List<Integer>> threeSum(int[] numbers)")
+	class ThreeSumTests {
+
+		@Test
+		@DisplayName("Input: [-1,0,1,2,-1,-4] -> Output: [[-1,-1,2],[-1,0,1]]")
+		public void testThreeSum_With_ValidIntegers() {
+			int[] testArray = { -1, 0, 1, 2, -1, -4 };
+			Object[] fArray = { -1, -1, 2 };
+			Object[] sArray = { -1, 0, 1 };
+			List<List<Integer>> output = asAlgorithms.threeSum(testArray);
+			System.out.print(output);
+
+			assertTrue(Arrays.equals(output.get(0).toArray(), sArray));
+			assertTrue(Arrays.equals(output.get(1).toArray(), fArray));
+		}
+
+		@Test
+		@DisplayName("Input: [] -> Output: []")
+		public void testThreeSum_With_EmptyIntArray() {
+			int[] testArray = new int[0];
+			List<List<Integer>> output = asAlgorithms.threeSum(testArray);
+			assertTrue(output.isEmpty());
+		}
+
+		@Test
+		@DisplayName("Input: [0] -> Output: []")
+		public void testThreeSum_With_ArrayWithZeros() {
+			int[] testArray = new int[1];
+			List<List<Integer>> output = asAlgorithms.threeSum(testArray);
+			assertTrue(output.isEmpty());
+		}
+
+	} // End ThreeSumTests
 
 }
