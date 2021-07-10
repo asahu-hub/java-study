@@ -189,40 +189,20 @@ public class ArraysStringsAlgorithms {
 	 * 
 	 * Notice that the solution set must not contain duplicate triplets.
 	 */
-	public List<List<Integer>> threeSum(int[] nums) {
+	public List<List<Integer>> threeSum(int[] nums) throws Exception {
 		List<List<Integer>> sum = new ArrayList<>();
 		if (nums.length == 0 || nums.length == 1) {
 			return sum;
 		}
 
-		return permutationsAndCombinations.combine(nums, 3).stream().filter(combination -> {
-			if (combination.stream().mapToInt(a -> a).sum() == 0) {
-				return true;
-			}
-			return false;
-		}).collect(Collectors.toList());
-	}
-
-	private List<List<Integer>> combinations(int[] nums, int r) {
-		List<List<Integer>> allCombinations = new ArrayList<>();
-		int total = nums.length;
-
-		for (int sCounter = 0; sCounter < total; sCounter++) {
-			int cNum = nums[sCounter];
-			List<Integer> combination = new ArrayList<>();
-			combination.add(cNum);
-			allCombinations.add(combination);
-		}
-		for (int j = 0; j < r - 1; j++) {
-			allCombinations.forEach(combination -> {
-				for (int sCounter = 0; sCounter < total; sCounter++) {
-					int cNum = nums[sCounter];
-					combination.add(cNum);
-				}
-			});
-		}
-		System.out.println("All Combinations: " + allCombinations);
-		return allCombinations;
+		Integer[] source = Arrays.stream(nums).boxed().toArray(Integer[]::new);
+		return permutationsAndCombinations.combine(source, 3).stream()
+				.map(a -> a.stream().sorted().collect(Collectors.toList())).filter(combination -> {
+					if (combination.stream().mapToInt(a -> a).sum() == 0) {
+						return true;
+					}
+					return false;
+				}).collect(Collectors.toSet()).stream().collect(Collectors.toList());
 	}
 
 }
