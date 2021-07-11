@@ -295,4 +295,89 @@ public class ArraysStringsAlgorithms {
 		}
 		return result;
 	}
+
+	/**
+	 * Given an integer array nums, return an array answer such that answer[i] is
+	 * equal to the product of all the elements of nums except nums[i].
+	 * 
+	 * The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit
+	 * integer.
+	 * 
+	 * You must write an algorithm that runs in O(n) time and without using the
+	 * division operation.
+	 * 
+	 * <br/>
+	 * Constraints:<br/>
+	 * 1. 2 <= nums.length <= 10^5 <br/>
+	 * 2. -30 <= nums[i] <= 30. <br/>
+	 * 3.The product of any prefix or suffix of nums is guaranteed to fit in a
+	 * 32-bit integer
+	 */
+	public int[] productExceptSelf(int[] nums) {
+		int totalElements = nums.length;
+		if (totalElements == 0 || totalElements == 1) {
+			return nums;
+		}
+		int products[] = new int[totalElements];
+		for (int i = 0; i < totalElements; i++) {
+			// System.out.println("Element: " + i);
+			int product = 1;
+			if (i == 0) {
+				product = multiplyArrayElements(Arrays.copyOfRange(nums, 1, totalElements));
+			} else if (i == totalElements) {
+				product = multiplyArrayElements(Arrays.copyOfRange(nums, 0, totalElements - 1));
+			} else {
+				int product_1 = multiplyArrayElements(Arrays.copyOfRange(nums, 0, i));
+				int product_2 = multiplyArrayElements(Arrays.copyOfRange(nums, i + 1, totalElements));
+				// System.out.println("Product 1: " + product_1 + "\tProduct 2: " + product_2);
+				product = product_1 * product_2;
+			}
+			// System.out.println("Product: " + product);
+			products[i] = product;
+		}
+		return products;
+	}
+
+	private int multiplyArrayElements(int[] nums) {
+//		System.out.println("\nReceived Num for multiplication: " + Arrays.toString(nums));
+		int product = 1;
+		for (int i = 0; i < nums.length; i++) {
+			product *= nums[i];
+		}
+		return product;
+	}
+
+	/**
+	 * Given a string s, determine if it is a palindrome, considering only
+	 * alphanumeric characters and ignoring cases.
+	 */
+	public boolean isPalindrome(String s) {
+		if (s == null) {
+			return false;
+		}
+		String replacingCharacter = "";
+		s = s.replaceAll("[^a-zA-Z0-9]", replacingCharacter).toLowerCase();
+		if (s.trim().isEmpty() || s.trim().length() == 1) {
+			return true;
+		}
+
+		// System.out.println("Transformed String: " + s.length());
+		int totalCharacters = s.length();
+		char[] allCharacters = s.toCharArray();
+		boolean isValidPalindrome = true;
+
+		int reverseCounter = 1;
+		int midPoint = (0 + totalCharacters) / 2;
+		for (int i = 0; i < midPoint; i++, reverseCounter++) {
+			int cEIndex = totalCharacters - reverseCounter;
+			if (allCharacters[i] == allCharacters[cEIndex]) {
+				continue;
+			} else {
+				isValidPalindrome = false;
+				break;
+			}
+		}
+		return isValidPalindrome;
+	}
+
 }

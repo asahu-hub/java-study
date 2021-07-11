@@ -1,6 +1,7 @@
 package org.asahu.hub.study.test.arraysandstrings;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
@@ -169,4 +170,45 @@ public class TestArraysStringsAlgorithms {
 
 	} // End StringMultiplicationTests
 
+	@Nested
+	@DisplayName("int[] productExceptSelf(int[] nums)")
+	class ProductExceptSelfTests {
+
+		@Test
+		@DisplayName("Input: [1,2,3,4] -> Output: [24,12,8,6]")
+		public void testMultiply_With_PositiveNumbers_1() throws Exception {
+			int[] testArray = { 1, 2, 3, 4 };
+			int[] expectedArray = { 24, 12, 8, 6 };
+			assertTrue(Arrays.equals(expectedArray, asAlgorithms.productExceptSelf(testArray)));
+		}
+
+		@Test
+		@DisplayName("Input: [-1,1,0,-3,3] -> Output: [0,0,9,0,0]")
+		public void testMultiply_With_PositiveNumbers_2() throws Exception {
+			int[] testArray = { -1, 1, 0, -3, 3 };
+			int[] expectedArray = { 0, 0, 9, 0, 0 };
+			assertTrue(Arrays.equals(expectedArray, asAlgorithms.productExceptSelf(testArray)));
+		}
+
+	} // End StringMultiplicationTests
+
+	@Nested
+	@DisplayName("boolean isPalindrome(String s)")
+	class IsPalindromeTests {
+
+		@Test
+		@DisplayName("Input: 'A man, a plan, a canal: Panama' -> Output: true")
+		public void testIsPalindrome_With_Valid_String() {
+			String testString = "A man, a plan, a canal: Panama";
+			assertTrue(asAlgorithms.isPalindrome(testString));
+		}
+
+		@Test
+		@DisplayName("Input: 'race a car' -> Output: false")
+		public void testIsPalindrome_With_InValid_String() {
+			String testString = "race a car";
+			assertFalse(asAlgorithms.isPalindrome(testString));
+		}
+
+	} // End StringMultiplicationTests
 }
