@@ -3,7 +3,6 @@ package org.asahu.hub.study.configuration;
 import org.asahu.hub.study.algorithms.ArrangeOperations;
 import org.asahu.hub.study.algorithms.SearchOperations;
 import org.asahu.hub.study.algorithms.SortOperations;
-import org.asahu.hub.study.algorithms.arraysandstrings.ArraysStringsAlgorithms;
 import org.asahu.hub.study.algorithms.search.divideconquer.BinarySearch;
 import org.asahu.hub.study.algorithms.sort.divideconquer.MergeSort;
 import org.asahu.hub.study.algorithms.sort.divideconquer.PermutationAndCombination;
@@ -33,10 +32,4 @@ public class AlgorithmConfigurations {
 	public ArrangeOperations<Integer> permutationAndCombination() {
 		return new PermutationAndCombination();
 	}
-
-	@Bean(name = "arraysStrings")
-	public ArraysStringsAlgorithms arraysAndStrings() {
-		return new ArraysStringsAlgorithms();
-	}
-
 }
