@@ -380,4 +380,31 @@ public class ArraysStringsAlgorithms {
 		return isValidPalindrome;
 	}
 
+	public boolean validPalindrome(String s) {
+		if (isPalindrome(s)) {
+			return true;
+		}
+
+		boolean validPalindrome = false;
+		char[] allCharacters = s.toCharArray();
+		int total = allCharacters.length;
+		int numberOfCharactersRemoved = 0;
+
+		for (int i = 0; i < total; i++) {
+			if (i == 0 && isPalindrome(s.substring(1))) {
+				numberOfCharactersRemoved++;
+				validPalindrome = true;
+			} else if (i == total - 1 && isPalindrome(s.substring(0, total))) {
+				numberOfCharactersRemoved++;
+				validPalindrome = true;
+			} else {
+				if (isPalindrome(String.join("", s.substring(0, i), s.substring(i + 1, total)))) {
+					numberOfCharactersRemoved++;
+					validPalindrome = true;
+				}
+			}
+		}
+		return (validPalindrome && numberOfCharactersRemoved < 2) ? true : false;
+	}
+
 }
