@@ -149,28 +149,34 @@ public class LinkedList_FB {
 		boolean flag = true;
 		int index = 0;
 		while (flag) {
-			Node cNode = head;
+			Node cNode = successor;
 			int currentValue = cNode.val;
-			Node cnNode = cNode.next;
-			Node crNode = cNode.random;
+			Node cNextNode = cNode.next;
+			Node cRandomNode = cNode.random;
 
 			// Exit if Next Node is null
-			if (cnNode == null) {
+			if (cNextNode == null) {
 				flag = false;
 			}
 
-			if (crNode != null) {
-				int randomNodeValue = crNode.val;
-				cache.put(randomNodeValue, crNode);
+			Node newNode = new Node(currentValue);
+
+			if (cRandomNode != null) {
+				int randomNodeValue = cRandomNode.val;
+				if (!cache.containsKey(randomNodeValue)) {
+					Node newRandomNode = new Node(randomNodeValue);
+					cache.put(randomNodeValue, newRandomNode);
+				}
+				newNode.random = cache.get(randomNodeValue);
 			}
+
 			if (index == 0) {
-				deepCopyNode = new Node(deepCopyNode.val);
+				deepCopyNode = newNode;
 				successor = deepCopyNode;
 			} else {
-				Node newNode = new Node(deepCopyNode.val);
-
+				successor.next = newNode;
+				successor = newNode;
 			}
-
 			// Cleanup Code
 			index++;
 		}
