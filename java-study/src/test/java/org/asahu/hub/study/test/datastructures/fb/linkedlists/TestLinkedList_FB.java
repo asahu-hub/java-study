@@ -72,4 +72,35 @@ public class TestLinkedList_FB {
 
 	} // End mergeTwoListsTests
 
+	@Nested
+	@DisplayName(" Node copyRandomList(Node head) ")
+	class copyRandomListTests {
+
+		@Test
+		@DisplayName("Input: [[1,1],[2,1]] -> Output: [[1,1],[2,1]]")
+		public void testLinkedListAddition_ValidIntegers() {
+			int[] firstList = { 2, 4, 3 };
+			int[] secondList = { 5, 6, 4 };
+			ll_fb.addTwoNumbers(ll_fb.init(firstList), ll_fb.init(secondList));
+
+		}
+
+		@Test
+		@DisplayName("Input: [0], [0] -> Output: [0]")
+		public void testLinkedListAddition_ZeroArray() {
+			int[] firstList = { 0 };
+			int[] secondList = { 0 };
+			ll_fb.addTwoNumbers(ll_fb.init(firstList), ll_fb.init(secondList));
+		}
+
+		@Test
+		@DisplayName("Input: [9,9,9,9,9,9,9], [9,9,9,9] -> Output: [8,9,9,9,0,0,0,1]")
+		public void testLinkedListAddition_MismatchingArrayLengths() {
+			int[] firstList = { 9, 9, 9, 9, 9, 9, 9 };
+			int[] secondList = { 9, 9, 9, 9 };
+			ll_fb.addTwoNumbers(ll_fb.init(firstList), ll_fb.init(secondList));
+		}
+
+	} // End copyRandomListTests
+
 }

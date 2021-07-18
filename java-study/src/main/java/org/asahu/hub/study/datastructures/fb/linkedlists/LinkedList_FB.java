@@ -1,5 +1,8 @@
 package org.asahu.hub.study.datastructures.fb.linkedlists;
 
+import java.util.Map;
+import java.util.TreeMap;
+
 public class LinkedList_FB {
 
 	/**
@@ -96,6 +99,8 @@ public class LinkedList_FB {
 		return firstNode;
 	}
 
+	<<<<<<<HEAD
+
 	/**
 	 * Merge two sorted linked lists and return it as a sorted list. The list should
 	 * be made by splicing together the nodes of the first two lists.
@@ -150,6 +155,90 @@ public class LinkedList_FB {
 		}
 		System.out.println("Merged Nodes: \n" + allMergedNodes);
 		return allMergedNodes;
+	}
+
+	class Node {
+		int val;
+		Node next;
+		Node random;
+
+		public Node(int val) {
+			this.val = val;
+			this.next = null;
+			this.random = null;
+		}
+	}
+
+	/**
+	 * A linked list of length n is given such that each node contains an additional
+	 * random pointer, which could point to any node in the list, or null.
+	 * 
+	 * Construct a deep copy of the list. The deep copy should consist of exactly n
+	 * brand new nodes, where each new node has its value set to the value of its
+	 * corresponding original node. Both the next and random pointer of the new
+	 * nodes should point to new nodes in the copied list such that the pointers in
+	 * the original list and copied list represent the same list state. None of the
+	 * pointers in the new list should point to nodes in the original list.
+	 * 
+	 * For example, if there are two nodes X and Y in the original list, where
+	 * X.random --> Y, then for the corresponding two nodes x and y in the copied
+	 * list, x.random --> y.
+	 * 
+	 * Return the head of the copied linked list.
+	 * 
+	 * The linked list is represented in the input/output as a list of n nodes. Each
+	 * node is represented as a pair of [val, random_index] where:
+	 * 
+	 * val: an integer representing Node.val random_index: the index of the node
+	 * (range from 0 to n-1) that the random pointer points to, or null if it does
+	 * not point to any node. Your code will only be given the head of the original
+	 * linked list.
+	 * 
+	 * Constraints:<br />
+	 * 1. 0 <= n <= 1000 <br />
+	 * 2. -10000 <= Node.val <= 10000 <br />
+	 * 3. Node.random is null or is pointing to some node in the linked list.
+	 */
+
+	public Node copyRandomList(Node head) {
+		Node deepCopyNode = head;
+		Node successor = head;
+		Map<Integer, Node> cache = new TreeMap<>();
+		boolean flag = true;
+		int index = 0;
+		while (flag) {
+			Node cNode = successor;
+			int currentValue = cNode.val;
+			Node cNextNode = cNode.next;
+			Node cRandomNode = cNode.random;
+
+			// Exit if Next Node is null
+			if (cNextNode == null) {
+				flag = false;
+			}
+
+			Node newNode = new Node(currentValue);
+
+			if (cRandomNode != null) {
+				int randomNodeValue = cRandomNode.val;
+				if (!cache.containsKey(randomNodeValue)) {
+					Node newRandomNode = new Node(randomNodeValue);
+					cache.put(randomNodeValue, newRandomNode);
+				}
+				newNode.random = cache.get(randomNodeValue);
+			}
+
+			if (index == 0) {
+				deepCopyNode = newNode;
+				successor = deepCopyNode;
+			} else {
+				successor.next = newNode;
+				successor = newNode;
+			}
+			// Cleanup Code
+			index++;
+		}
+		return deepCopyNode;
 	}
 
 }
