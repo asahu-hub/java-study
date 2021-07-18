@@ -96,4 +96,60 @@ public class LinkedList_FB {
 		return firstNode;
 	}
 
+	/**
+	 * Merge two sorted linked lists and return it as a sorted list. The list should
+	 * be made by splicing together the nodes of the first two lists.
+	 * 
+	 * 
+	 * Constraints:
+	 * 
+	 * 1. The number of nodes in both lists is in the range [0, 50]. <br/>
+	 * 2. -100 <= Node.val <= 100 <br/>
+	 * 3. Both l1 and l2 are sorted in non-decreasing order.
+	 */
+	public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+		System.out.println("Received List Node 11:" + l1 + "\n List Node l2: " + l2);
+		ListNode allMergedNodes = new ListNode();
+		ListNode successor = new ListNode();
+
+		boolean flag = true;
+		int index = 0;
+
+		ListNode cFNode = l1;
+		ListNode cSNode = l2;
+		while (flag) {
+			int cFValue = cFNode.val;
+			int cSValue = cSNode.val;
+			ListNode nFNode = cFNode.next;
+			ListNode nSNode = cSNode.next;
+
+			if (nFNode == null && nSNode == null) {
+				flag = false;
+			}
+
+			int cValue = 0;
+			if (cFValue >= cSValue) {
+				cValue = cFValue;
+				cFNode = nFNode;
+			} else {
+				cValue = cSValue;
+				cSNode = nSNode;
+			}
+
+			if (index == 0) {
+				allMergedNodes = new ListNode(cValue);
+				successor = allMergedNodes;
+			} else {
+				ListNode newNode = new ListNode(cValue);
+				successor.next = newNode;
+				successor = newNode;
+			}
+
+			// Cleanup
+			++index;
+		}
+		System.out.println("Merged Nodes: \n" + allMergedNodes);
+		return allMergedNodes;
+	}
+
 }

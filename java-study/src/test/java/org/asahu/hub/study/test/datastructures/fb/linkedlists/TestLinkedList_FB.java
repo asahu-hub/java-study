@@ -12,7 +12,7 @@ public class TestLinkedList_FB {
 	private final LinkedList_FB ll_fb = new LinkedList_FB();
 
 	@Nested
-	@DisplayName(" LinkedListNode_FB addTwoNumbers(LinkedListNode_FB l1, LinkedListNode_FB l2)")
+	@DisplayName(" ListNode addTwoNumbers(ListNode l1, ListNode l2)")
 	class addTwoNumbersTests {
 
 		@Test
@@ -40,6 +40,36 @@ public class TestLinkedList_FB {
 			ll_fb.addTwoNumbers(ll_fb.init(firstList), ll_fb.init(secondList));
 		}
 
-	} // End lengthOfLongestSubstringTests
+	} // End addTwoNumbersTests
+
+	@Nested
+	@DisplayName("ListNode mergeTwoLists(ListNode l1, ListNode l2)")
+	class mergeTwoListsTests {
+
+		@Test
+		@DisplayName("Input: [1,2,4], [1,3,4] -> Output: [1,1,2,3,4,4]")
+		public void testMergeTwoLists_ValidIntegers() {
+			int[] firstList = { 1, 2, 4 };
+			int[] secondList = { 1, 3, 4 };
+			ll_fb.mergeTwoLists(ll_fb.init(firstList), ll_fb.init(secondList));
+		}
+
+		@Test
+		@DisplayName("Input: [], [] -> Output: []")
+		public void testMergeTwoLists_EmptyArray() {
+			int[] firstList = {};
+			int[] secondList = {};
+			ll_fb.mergeTwoLists(ll_fb.init(firstList), ll_fb.init(secondList));
+		}
+
+		@Test
+		@DisplayName("Input: [], [0] -> Output: [0]")
+		public void testMergeTwoLists_OneEmptyArray() {
+			int[] firstList = {};
+			int[] secondList = { 0 };
+			ll_fb.mergeTwoLists(ll_fb.init(firstList), ll_fb.init(secondList));
+		}
+
+	} // End mergeTwoListsTests
 
 }
